@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-cloudhsm
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-cloudhsm
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  hosts:
+  - aws-cloudhsm.tcp.svc
+  addresses:
+  - {{ .Values.global.cluster.cloudHsmIp | quote }}
+  ports:
+  - number: 2223
+    name: mgmt-1
+    protocol: TCP
+  - number: 2224
+    name: mgmt-2
+    protocol: TCP
+  - number: 2225
+    name: mgmt-3
+    protocol: TCP
+  location: MESH_EXTERNAL
+  resolution: STATIC
+  endpoints:
+  - address: {{ .Values.global.cluster.cloudHsmIp | quote }}

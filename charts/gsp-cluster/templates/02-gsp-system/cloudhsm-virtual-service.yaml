@@ -1,0 +1,82 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-direct-cloudhsm-through-egressgateway
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-cloudhsm
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  hosts:
+  - aws-cloudhsm.tcp.svc
+  gateways:
+  - mesh
+  - {{ include "gsp-cluster.fullname" . }}-cloudhsm
+  tcp:
+  - match:
+    - gateways:
+      - mesh
+      destinationSubnets:
+      - {{ .Values.global.cluster.cloudHsmIp }}/32
+      port: 2223
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: {{ include "gsp-cluster.fullname" . }}-cloudhsm
+        port:
+          number: 2223
+  - match:
+    - gateways:
+      - mesh
+      destinationSubnets:
+      - {{ .Values.global.cluster.cloudHsmIp }}/32
+      port: 2224
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: {{ include "gsp-cluster.fullname" . }}-cloudhsm
+        port:
+          number: 2224
+  - match:
+    - gateways:
+      - mesh
+      destinationSubnets:
+      - {{ .Values.global.cluster.cloudHsmIp }}/32
+      port: 2225
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: {{ include "gsp-cluster.fullname" . }}-cloudhsm
+        port:
+          number: 2225
+  - match:
+    - gateways:
+      - {{ include "gsp-cluster.fullname" . }}-cloudhsm
+      port: 2223
+    route:
+    - destination:
+        host: aws-cloudhsm.tcp.svc
+        port:
+          number: 2223
+      weight: 100
+  - match:
+    - gateways:
+      - {{ include "gsp-cluster.fullname" . }}-cloudhsm
+      port: 2224
+    route:
+    - destination:
+        host: aws-cloudhsm.tcp.svc
+        port:
+          number: 2224
+      weight: 100
+  - match:
+    - gateways:
+      - {{ include "gsp-cluster.fullname" . }}-cloudhsm
+      port: 2225
+    route:
+    - destination:
+        host: aws-cloudhsm.tcp.svc
+        port:
+          number: 2225
+      weight: 100

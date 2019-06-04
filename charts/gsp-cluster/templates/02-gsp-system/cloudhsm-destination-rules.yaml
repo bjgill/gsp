@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-egressgateway-for-cloudhsm
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-cloudhsm
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  subsets:
+  - name: {{ include "gsp-cluster.fullname" . }}-cloudhsm
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: 2223
+        tls:
+          mode: ISTIO_MUTUAL
+          sni: aws-cloudhsm.tcp.svc
+      - port:
+          number: 2224
+        tls:
+          mode: ISTIO_MUTUAL
+          sni: aws-cloudhsm.tcp.svc
+      - port:
+          number: 2225
+        tls:
+          mode: ISTIO_MUTUAL
+          sni: aws-cloudhsm.tcp.svc
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-cloudhsm
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-cloudhsm
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  host: aws-cloudhsm.tcp.svc
