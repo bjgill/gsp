@@ -199,6 +199,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-egress-to-istio-system-and-kube-dns
+  namespace: {{ .name }}
 spec:
   podSelector: {}
   policyTypes:
