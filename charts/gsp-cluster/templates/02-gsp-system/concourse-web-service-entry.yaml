@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-concourse
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-concourse
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  hosts:
+    - "gsp-concourse-web"
+  ports:
+  - number: 8080
+    name: web
+    protocol: HTTP
+  location: MESH_EXTERNAL
+  resolution: DNS
