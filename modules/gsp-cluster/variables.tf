@@ -137,6 +137,10 @@ variable "codecommit_init_role_arn" {
   default = ""
 }
 
+variable "cloud_hsm_ip" {
+  type = "string"
+}
+
 variable "vpc_id" {
   type = "string"
 }

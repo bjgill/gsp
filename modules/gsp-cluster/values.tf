@@ -41,6 +41,7 @@ data "template_file" "values" {
     cloudwatch_log_group_name           = "${aws_cloudwatch_log_group.logs.name}"
     canary_role                         = "${aws_iam_role.canary_role.name}"
     canary_code_commit_url              = "${aws_codecommit_repository.canary.clone_url_http}"
+    cloud_hsm_ip                        = "${var.cloud_hsm_ip}"
 
     permitted_roles_regex = "^(${join("|", list(
       aws_iam_role.harbor.name,

@@ -165,6 +165,7 @@ module "gsp-cluster" {
   k8s_splunk_index              = "${var.k8s_splunk_index}"
   vpc_flow_log_splunk_hec_token = "${var.vpc_flow_log_splunk_hec_token}"
   vpc_flow_log_splunk_index     = "${var.vpc_flow_log_splunk_index}"
+  cloud_hsm_ip                  = "${element(module.hsm.hsm_ips, 0)}"
 
   codecommit_init_role_arn = "${var.aws_account_role_arn}"
   github_client_id         = "${var.github_client_id}"
