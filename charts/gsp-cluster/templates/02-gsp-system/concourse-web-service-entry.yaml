@@ -30,4 +30,4 @@ spec:
   host: "gsp-concourse-web.gsp-system.svc.cluster.local"
   trafficPolicy:
     tls:
-      mode: NONE
+      mode: DISABLE
