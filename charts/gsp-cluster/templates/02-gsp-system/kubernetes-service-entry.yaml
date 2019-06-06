@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-kubernetes
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-kubernetes
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  hosts:
+  - "kubernetes.default.svc.cluster.local"
+  addresses:
+  - 172.20.0.1
+  ports:
+  - number: 443
+    name: https
+    protocol: tcp
+  location: MESH_INTERNAL
+  resolution: NONE
