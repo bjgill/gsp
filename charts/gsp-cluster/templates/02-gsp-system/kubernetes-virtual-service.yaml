@@ -25,12 +25,11 @@ spec:
         host: istio-egressgateway.istio-system.svc.cluster.local
         port:
           number: 443
+  tcp:
   - match:
     - gateways:
       - {{ include "gsp-cluster.fullname" . }}-kubernetes
       port: 443
-      sniHosts:
-      - kubernetes.default.svc.cluster.local
     route:
     - destination:
         host: kubernetes.default.svc.cluster.local
