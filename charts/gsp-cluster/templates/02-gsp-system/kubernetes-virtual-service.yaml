@@ -29,6 +29,8 @@ spec:
     - gateways:
       - {{ include "gsp-cluster.fullname" . }}-kubernetes
       port: 443
+      sniHosts:
+      - kubernetes.default.svc.cluster.local
     route:
     - destination:
         host: kubernetes.default.svc.cluster.local
