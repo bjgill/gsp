@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "gsp-cluster.fullname" . }}-egressgateway-for-kubernetes
+  labels:
+    app.kubernetes.io/name: {{ include "gsp-cluster.name" . }}-kubernetes
+    helm.sh/chart: {{ include "gsp-cluster.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  subsets:
+  - name: {{ include "gsp-cluster.fullname" . }}-kubernetes
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: 443
+        tls:
+          mode: ISTIO_MUTUAL
+          sni: kubernetes.default.svc.cluster.local
