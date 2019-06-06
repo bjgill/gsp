@@ -18,8 +18,8 @@ spec:
     - gateways:
       - mesh
       port: 443
-      sni_hosts:
-        - kubernetes.default.svc.cluster.local
+      sniHosts:
+      - kubernetes.default.svc.cluster.local
     route:
     - destination:
         host: istio-egressgateway.istio-system.svc.cluster.local
