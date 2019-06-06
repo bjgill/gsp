@@ -17,4 +17,4 @@ spec:
     name: https
     protocol: tcp
   location: MESH_INTERNAL
-  resolution: NONE
+  resolution: STATIC
