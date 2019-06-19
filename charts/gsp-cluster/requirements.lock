@@ -10,9 +10,9 @@ dependencies:
   version: 6.4.1
 - name: kiam
   repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 2.2.0
+  version: 2.2.5
 - name: harbor
   repository: https://helm.goharbor.io/
   version: 1.1.0
-digest: sha256:a0a175e0f1540a2d32318a1bdb34c6b0963e7d0b5792ae478ea046ec189a8e0b
-generated: "2019-06-14T13:23:15.105558+01:00"
+digest: sha256:dfa4afc3eddc4c8a2085557e46306305837fbb13f6a60fcfa1692c7a8829e603
+generated: 2019-06-19T19:00:53.536689+01:00
