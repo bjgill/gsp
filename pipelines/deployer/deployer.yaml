@@ -113,7 +113,7 @@ generate_namespace_values: &generate_namespace_values
   platform: linux
   image_resource: *task_image_resource
   params:
-    CLUSTER_NAME: ((cluster-name))
+    ACCOUNT_NAME: ((account-name))
     CLUSTER_CONFIG_PATH: ((config-path))
   run:
     path: /bin/bash
@@ -125,9 +125,9 @@ generate_namespace_values: &generate_namespace_values
       echo "creating helm compatible values file from namespace data"
       mkdir -p namespace-values
       namespace_values_file="$(pwd)/namespace-values/values.yaml"
-      echo "--> ${CLUSTER_NAME}-main"
+      echo "--> ${ACCOUNT_NAME}-main"
       echo "namespaces:" > $namespace_values_file
-      echo "- name: ${CLUSTER_NAME}-main" >> $namespace_values_file
+      echo "- name: ${ACCOUNT_NAME}-main" >> $namespace_values_file
       yq .namespaces --yaml-output < "./config/${CLUSTER_CONFIG_PATH}" >> $namespace_values_file
       cat $namespace_values_file
       echo "OK!"
