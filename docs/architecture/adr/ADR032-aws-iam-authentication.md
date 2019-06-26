@@ -1,4 +1,4 @@
-# ADR032: AWS IAM Authentication (for admins)
+# ADR032: AWS IAM Authentication
 
 ## Status
 
