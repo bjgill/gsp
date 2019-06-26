@@ -29,7 +29,7 @@ The platform is for teams working in the [Government Digital Service](https://ww
 - Protective monitoring provided by GDS TechOps CyberSecurity with [Splunk](https://www.splunk.com/)
 - Cloud infrastructure hosted on [AWS](https://aws.amazom.com) in three availability zones in the London region managed with [Terraform](https://www.terraform.io/)
 - Kubernetes control plane with [AWS EKS](https://aws.amazon.com/eks/)
-- A local GDS Supported Platform development environment `[gsp-local](https://github.com/alphagov/gsp/blob/master/docs/gds-supported-platform/getting-started-gsp-local.md)` based on [minikube](https://github.com/kubernetes/minikube) 
+- A local GDS Supported Platform development environment [gsp-local](https://github.com/alphagov/gsp/blob/master/docs/gds-supported-platform/getting-started-gsp-local.md) based on [minikube](https://github.com/kubernetes/minikube)
 
 
 ## Getting started
