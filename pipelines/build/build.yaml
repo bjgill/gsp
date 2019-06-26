@@ -1,0 +1,80 @@
+---
+github_source: &github_source
+  uri: https://github.com/alphagov/gsp.git
+  organization: alphagov
+  owner: alphagov
+  repository: gsp
+  github_api_token: ((github.api-token))
+  access_token: ((github.api-token))
+  approvers: ((trusted-developers.github-accounts))
+  required_approval_count: 2
+  commit_verification_keys: ((trusted-developers.gpg-keys))
+
+dockerhub_source: &dockerhub_source
+  username: ((dockerhub.username))
+  password: ((dockerhub.password))
+
+resource_types:
+- name: github
+  type: registry-image
+  source:
+    repository: "govsvc/concourse-github-resource"
+    tag: "v0.0.3"
+
+resources:
+- name: github-resource-src
+  type: github
+  # icon: github-circle
+  source:
+    <<: *github_source
+    paths:
+    - components/concourse-github-resource/**/*
+
+- name: pipeline-operator-src
+  type: github
+  # icon: github-circle
+  source:
+    <<: *github_source
+    paths:
+    - components/concourse-operator/**/*
+
+- name: github-resource-image
+  type: docker-image
+  # icon: layers
+  source:
+    <<: *dockerhub_source
+    repository: govsvc/concourse-github-resource
+
+- name: pipeline-operator-image
+  type: docker-image
+  # icon: layers
+  source:
+    <<: *dockerhub_source
+    repository: govsvc/gsp-concourse-pipeline-controller
+
+jobs:
+- name: github-resource
+  serial: true
+  plan:
+  - get: github-resource-src
+    trigger: true
+  - put: github-resource-image
+    params:
+      build: github-resource-src
+      dockerfile: github-resource-src/components/concourse-github-resource/Dockerfile
+      tag_file: github-resource-src/.git/short_ref
+      tag_as_latest: true
+      tag_prefix: v
+
+- name: pipeline-operator
+  serial: true
+  plan:
+  - get: pipeline-operator-src
+    trigger: true
+  - put: pipeline-operator-image
+    params:
+      build: pipeline-operator-src
+      dockerfile: pipeline-operator-src/components/concourse-operator/Dockerfile
+      tag_file: pipeline-operator-src/.git/short_ref
+      tag_as_latest: true
+      tag_prefix: v
