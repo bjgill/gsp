@@ -28,11 +28,13 @@ The platform is for teams working in the [Government Digital Service](https://ww
 - Protective monitoring provided by GDS TechOps CyberSecurity with [Splunk](https://www.splunk.com/)
 - Cloud infrastructure hosted on [AWS](https://aws.amazom.com) in three availability zones in the London region managed with [Terraform](https://www.terraform.io/)
 - Kubernetes control plane with [AWS EKS](https://aws.amazon.com/eks/)
+- A local GDS Supported Platform development environent `[gsp-local](https://github.com/alphagov/gsp/blob/master/docs/gds-supported-platform/getting-started-gsp-local.md)`
+
 
 ## Getting started
 
-- [Host a GDS Supported Platform cluster in the AWS cloud](docs/gds-supported-platform/getting-started-gsp-cluster.md)
-- [Host a GDS Supported Platform cluster locally](docs/gds-supported-platform/getting-started-gsp-local.md)
+- [Getting started with a GDS Supported Platform cluster](docs/gds-supported-platform/getting-started-gsp-cluster.md) - AWS
+- [Getting started with a local GDS Supported Platform development cluster](docs/gds-supported-platform/getting-started-gsp-local.md) - Local
 
 
 
