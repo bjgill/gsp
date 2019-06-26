@@ -24,7 +24,8 @@ The platform is for teams working in the [Government Digital Service](https://ww
 - Scanning of docker images for security vulnerabilities with [clair](https://github.com/coreos/clair)
 - Monitoring and alerting with [Prometheus](https://prometheus.io/), [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) and [Grafana](https://grafana.com/)
 - Secure git-based secrets configuration with [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
-- Ingress management with [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/)
+- Ingress management and service mesh with [istio](https://istio.io/)
+- [AWS Global Accellerator](https://aws.amazon.com/global-accelerator/) for static IP routing
 - Protective monitoring provided by GDS TechOps CyberSecurity with [Splunk](https://www.splunk.com/)
 - Cloud infrastructure hosted on [AWS](https://aws.amazom.com) in three availability zones in the London region managed with [Terraform](https://www.terraform.io/)
 - Kubernetes control plane with [AWS EKS](https://aws.amazon.com/eks/)
