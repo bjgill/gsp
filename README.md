@@ -43,5 +43,6 @@ The platform is for teams working in the [Government Digital Service](https://ww
 
 For help or support:
 - read our [documentation](/docs)
+- read about our [architecture ](/docs/architecture/gsp-architecture.md)
 - raise an [issue](https://github.com/alphagov/gsp/issues)
-- message the team on the Reliability [Engineering Slack channel](https://gds.slack.com/messages/CAD6NP598) [#reliability-eng](https://gds.slack.com/messages/CAD6NP598)
+- ask questions on the Reliability Engineering Slack channel: [#reliability-eng](https://gds.slack.com/messages/CAD6NP598)
